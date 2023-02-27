@@ -1,0 +1,11 @@
+// original author: James Dawson
+// https://css-tricks.com/simplified-fluid-typography/
+// `fluid-calc` returns a `calc` property that aids in providing vw-based fluid typography
+@function fluid-calc(
+  $min-value,
+  $max-value,
+  $min-breakpoint: 320px,
+  $max-breakpoint: $breakpoint-xl
+) {
+  @return calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-breakpoint}) / #{strip-unit($max-breakpoint - $min-breakpoint)});
+}

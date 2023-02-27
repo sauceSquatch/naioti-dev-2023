@@ -1,0 +1,87 @@
+// Common sass utility. Removes units to aid in unconventional calculations
+@use 'sass:math';
+
+// MIXINS
+@mixin no-scrollbars {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+// original author: James Dawson
+// `fluid` takes in a sass-map of declarations, each of which should include a sass-map containing a minimum px value and maximum px value.
+// `fluid-calc` is called to generate a linear-scaling size
+// all maximum values are output as an override for the max-screen-size, which can be overridden as the second paramater.
+@mixin fluid($declarations, $min-breakpoint: 320px, $max-breakpoint: 1440px) {
+  $max-rules: ();
+
+  @each $property, $value in $declarations {
+    $min: nth($value, 1);
+    $max: nth($value, 2);
+
+    $max-rules: map-merge($max-rules, ($property: $max));
+
+    #{$property}: fluid-calc($min, $max, $min-breakpoint: $min-breakpoint, $max-breakpoint: $max-breakpoint);
+  }
+
+  @media (min-width: $max-breakpoint) {
+    @each $property, $value in $max-rules {
+      #{$property}: $value;
+    }
+  }
+}
+
+
+// VARIABLES
+// Breakpoints
+$break-sm: 640px;
+$break-md: 768px;
+$break-lg: 1024px;
+$break-xl: 1280px;
+
+// Primary
+$color--brand-blue-dark: #01003F;
+$color--brand-blue-light: #0069FF;
+$color--brand-blue-link: #2B69FF;
+$color--brand-blue-link-pressed: #2650B7;
+$color--gray-80: #333;
+$color--white: #fff;
+
+// Secondary
+$color--gray-10: #EDEDED;
+$color--gray-40: #909090;
+$color--gray-60: #555555;
+$color--gray-90: #222222;
+$color--grey-light: #F5F5F5;
+$color--gray-blue: #BBD5E0;
+$color--black: #131010;
+$color--red: #E02B2B;
+
+// Z-INDEXES
+$z-index--base-carousel-arrow: 6;
+$z-index--content: 30;
+$z-index--cloud-behind: -1;
+$z-index--cloud-infront: 31;
+$z-index--modal: 500;
+
+
+// FUNCTIONS
+// original author: James Dawson
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+  @return $number;
+}
+// original author: James Dawson
+// https://css-tricks.com/simplified-fluid-typography/
+// `fluid-calc` returns a `calc` property that aids in providing vw-based fluid typography
+@function fluid-calc(
+  $min-value,
+  $max-value,
+  $min-breakpoint: 320px,
+  $max-breakpoint: $break-xl
+) {
+  @return calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-breakpoint}) / #{strip-unit($max-breakpoint - $min-breakpoint)});
+}
