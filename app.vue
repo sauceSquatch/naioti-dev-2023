@@ -1,7 +1,9 @@
 <template>
   <div>
     <HeroSection />
-    <LogosSection />
-    <AustinSpace />
+    <Connect />
+    <Footer />
+    <!-- <LogosSection /> -->
+    <!-- <AustinSpace /> -->
   </div>
 </template>

@@ -1,24 +1,33 @@
 <template>
     <section ref="landingHero" id="landing-hero" class="landing-hero-section">
-        <h1>This is a headline</h1>
-        <div
-            ref="heroLottieBrown"
-            class="lottie-full-bg"></div>
-        <div
-            ref="heroLottieBlue"
-            class="lottie-full-bg"></div>
+        <div class="hero-profile">
+            <nuxt-picture class="logo-naioti" src="/images/logo_naioti.svg"/>
+        </div>
+        <div class="animated-background">
+            <div
+                ref="heroLottieGradient"
+                class="lottie-full-bg"></div>
+            <div
+                ref="heroLottieBlueBean"
+                class="lottie-bg-item lottie-blue-bean"></div>
+            <div
+                ref="heroLottieBlue"
+                class="lottie-bg-item lottie-blue"></div>
+        </div>
     </section>
 </template>
 <script setup lang="ts">
     // import gsap from 'gsap'
     import lottie from 'lottie-web'
 
-    import lottieBeanBlue from '../assets/animations/landing-blue-circle-rotate.json'
-    import lottieBeanBrown from '../assets/animations/big-bean-brown.json'
+    import lottieBeanBlue from '../assets/animations/landing-blue-circle.json'
+    import lottieBeanBlueBean from '../assets/animations/big-bean-blue.json'
+    import lottieBeanBrown from '../assets/animations/gradient-bg.json'
 
     const landingHero = ref<HTMLElement | null>(null)
     const heroLottieBlue = ref<HTMLElement | null>(null)
-    const heroLottieBrown = ref<HTMLElement | null>(null)
+    const heroLottieBlueBean = ref<HTMLElement | null>(null)
+    const heroLottieGradient = ref<HTMLElement | null>(null)
     const lottieObj = lottie
     const isReducedMotion = ref(true)
 
@@ -45,9 +54,18 @@
             animationData: lottieBeanBlue
             })
         }
-        if(heroLottieBrown.value) {
+        if(heroLottieBlueBean.value) {
             lottieObj.loadAnimation({
-            container: heroLottieBrown.value, // the dom element that will contain the animation
+            container: heroLottieBlueBean.value, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: lottieBeanBlueBean
+            })
+        }
+        if(heroLottieGradient.value) {
+            lottieObj.loadAnimation({
+            container: heroLottieGradient.value, // the dom element that will contain the animation
             renderer: 'svg',
             loop: true,
             autoplay: true,
@@ -85,10 +103,46 @@
 </script>
 <style scoped lang="scss">
 .landing-hero-section {
-    container: slides-container / size;
     position: relative;
-    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    aspect-ratio: 16 / 9;
+    container: hero-container / size;
     overflow: hidden;
-    background-color: #C5D4D8;
+
+    @media (min-width: $break-sm) {
+        aspect-ratio: 16 / 9;
+    }
+
+    @media (min-width: $break-lg) {
+        aspect-ratio: 16 / 6;
+    }
+    
+}
+.hero-profile {
+    position: absolute;
+    z-index: 333;
+}
+.animated-background {
+    height: 100cqh;
+    width: 100cqw;
+    position: absolute;
+    overflow: hidden;
+    background: rgb(89,117,124);
+    background: linear-gradient(304deg, rgba(139,166,173,1) 0%, rgba(156,183,190,1) 17%, rgba(206,226,231,1) 84%);
+}
+.lottie-bg-item {
+    position: absolute;
+}
+.lottie-blue-bean {
+    bottom: -40%;
+}
+.lottie-blue {
+    top: 50%;
+    left: 8%;
+    width: 60cqw;
+    height: 60cqh;
 }
 </style>
