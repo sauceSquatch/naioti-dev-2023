@@ -7,37 +7,38 @@ body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     font-family: 'Usual Light', 'Arial', sans-serif;
+    background-color: black;
 }
 
 // FONTS
-@font-face {
-    font-family: 'Usual Light';
-    font-style: normal;
-    font-weight: 200;
-    font-display: swap;
-    src: url('~/assets/fonts/Usual-Light.woff') format('woff');
-  }
-  @font-face {
-    font-family: 'Usual';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('~/assets/fonts/Usual-Regular.woff') format('woff');
-  }
-  @font-face {
-    font-family: 'Usual Medium';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url('~/assets/fonts/Usual-Medium.woff') format('woff');
-  }
-  @font-face {
-    font-family: 'Gilroy';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('~/assets/fonts/Gilroy-Medium.woff') format('woff');
-  }
+// @font-face {
+//     font-family: 'Usual Light';
+//     font-style: normal;
+//     font-weight: 200;
+//     font-display: swap;
+//     src: url('~/assets/fonts/Usual-Light.woff') format('woff');
+//   }
+//   @font-face {
+//     font-family: 'Usual';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-display: swap;
+//     src: url('~/assets/fonts/Usual-Regular.woff') format('woff');
+//   }
+//   @font-face {
+//     font-family: 'Usual Medium';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-display: swap;
+//     src: url('~/assets/fonts/Usual-Medium.woff') format('woff');
+//   }
+//   @font-face {
+//     font-family: 'Gilroy';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-display: swap;
+//     src: url('~/assets/fonts/Gilroy-Medium.woff') format('woff');
+//   }
 
   //TYPOGRAPHY
   .global--heading-one {

@@ -83,7 +83,7 @@ export default {
                 scrub: 1.5,
             })
 
-            console.log('this.astroCore1.clientWidth:', this.astroCore1.width);
+            // console.log('this.astroCore1.clientWidth:', this.astroCore1.clientWidth);
             console.log('austinToSpace', this.austinToSpace.clientWidth);
             console.log('austinCloud1', this.austinCloud1.clientWidth);
             const spaceTL = this.gsap.timeline();
