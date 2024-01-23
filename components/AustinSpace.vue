@@ -78,7 +78,7 @@ export default {
             
             const mainST = this.scrollTrigger.create({
                 animation: mainTL,
-                trigger: '#austin-to-space', 
+                trigger: '.austin-to-space', 
                 markers: true,
                 scrub: 1.5,
             })
