@@ -4,6 +4,6 @@
     <Connect />
     <Footer />
     <!-- <LogosSection /> -->
-    <!-- <AustinSpace /> -->
+    <AustinSpace />
   </div>
 </template>

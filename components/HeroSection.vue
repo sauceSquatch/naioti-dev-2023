@@ -1,18 +1,19 @@
 <template>
     <section ref="landingHero" id="landing-hero" class="landing-hero-section">
         <div class="hero-profile">
-            <nuxt-picture class="logo-naioti" src="/images/logo_naioti.svg"/>
+            <img class="hero-profile-circle" src="/images/blue-circle.svg" alt="">
+            <img class="hero-profile-pic" src="/images/jamie-profile-landing-hero-lrg.webp" alt="">
         </div>
         <div class="animated-background">
             <div
-                ref="heroLottieGradient"
-                class="lottie-full-bg"></div>
+                ref="heroLottieBackBean"
+                class="lottie-bg-item lottie-back-bean"></div>
             <div
-                ref="heroLottieBlueBean"
-                class="lottie-bg-item lottie-blue-bean"></div>
+                ref="heroLottieMidBean"
+                class="lottie-bg-item lottie-mid-bean"></div>
             <div
-                ref="heroLottieBlue"
-                class="lottie-bg-item lottie-blue"></div>
+                ref="heroLottieTopBean"
+                class="lottie-bg-item lottie-top-bean"></div>
         </div>
     </section>
 </template>
@@ -20,23 +21,22 @@
     // import gsap from 'gsap'
     import lottie from 'lottie-web'
 
-    import lottieBeanBlue from '../assets/animations/landing-blue-circle.json'
-    import lottieBeanBlueBean from '../assets/animations/big-bean-blue.json'
-    import lottieBeanBrown from '../assets/animations/gradient-bg.json'
+    import lottieBeanTop from '../assets/animations/landing-shape-sml-orange.json'
+    import lottieBeanMid from '../assets/animations/landing-shape-med-peach.json'
+    import lottieBeanBack from '../assets/animations/landing-shape-lrg-offwhite.json'
 
     const landingHero = ref<HTMLElement | null>(null)
-    const heroLottieBlue = ref<HTMLElement | null>(null)
-    const heroLottieBlueBean = ref<HTMLElement | null>(null)
-    const heroLottieGradient = ref<HTMLElement | null>(null)
+    const heroLottieBackBean = ref<HTMLElement | null>(null)
+    const heroLottieMidBean = ref<HTMLElement | null>(null)
+    const heroLottieTopBean = ref<HTMLElement | null>(null)
     const lottieObj = lottie
     const isReducedMotion = ref(true)
 
     onMounted(() => {
-        console.log('slide 02 mounted')
         // check for isReducedMotion before setting up animations
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
         isReducedMotion.value = mediaQuery.matches
-        console.log('slide 02 mounted - isReducedMotion: ', isReducedMotion.value)
+        console.log('Hero section  | reduced motion value:  ', isReducedMotion.value)
         if(!isReducedMotion.value) {
             setupAnimations()
             configureTweens()
@@ -45,31 +45,31 @@
     function setupAnimations() {
         // lottie setup
         // ts needs an if otherwise it doesn't trust the ref isn't empty
-        if(heroLottieBlue.value) {
+        if(heroLottieBackBean.value) {
             lottieObj.loadAnimation({
-            container: heroLottieBlue.value, // the dom element that will contain the animation
+            container: heroLottieBackBean.value, // the dom element that will contain the animation
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            animationData: lottieBeanBlue
+            animationData: lottieBeanBack
             })
         }
-        if(heroLottieBlueBean.value) {
+        if(heroLottieMidBean.value) {
             lottieObj.loadAnimation({
-            container: heroLottieBlueBean.value, // the dom element that will contain the animation
+            container: heroLottieMidBean.value, // the dom element that will contain the animation
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            animationData: lottieBeanBlueBean
+            animationData: lottieBeanMid
             })
         }
-        if(heroLottieGradient.value) {
+        if(heroLottieTopBean.value) {
             lottieObj.loadAnimation({
-            container: heroLottieGradient.value, // the dom element that will contain the animation
+            container: heroLottieTopBean.value, // the dom element that will contain the animation
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            animationData: lottieBeanBrown
+            animationData: lottieBeanTop
             })
         }
     }
@@ -106,7 +106,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     flex-wrap: nowrap;
     aspect-ratio: 16 / 9;
     container: hero-container / size;
@@ -118,31 +118,50 @@
 
     @media (min-width: $break-lg) {
         aspect-ratio: 16 / 6;
+        width: 80%;
+        margin: 0 auto;
     }
-    
 }
 .hero-profile {
-    position: absolute;
+    width: 100cqw;
+    height: 100cqh;
+    display: flex;
+    justify-content: flex-end;
     z-index: 333;
+}
+.hero-profile-pic {
+    position: absolute;
+    height: 110%;
+    top: 25%;
+}
+.hero-profile-circle {
+    position: absolute;
+    bottom: -45%;
+    right: 3%;
+    height: 90%;
 }
 .animated-background {
     height: 100cqh;
     width: 100cqw;
     position: absolute;
     overflow: hidden;
-    background: rgb(89,117,124);
-    background: linear-gradient(304deg, rgba(139,166,173,1) 0%, rgba(156,183,190,1) 17%, rgba(206,226,231,1) 84%);
+    background: #FFFFFF;
+    // background: linear-gradient(304deg, rgba(139,166,173,1) 0%, rgba(156,183,190,1) 17%, rgba(206,226,231,1) 84%);
 }
 .lottie-bg-item {
     position: absolute;
 }
-.lottie-blue-bean {
-    bottom: -40%;
+.lottie-top-bean {
+    bottom: 10%;
+    left: 28%;
+    width: 15cqw;
 }
-.lottie-blue {
-    top: 50%;
+.lottie-mid-bean {
+    bottom: -50%;
     left: 8%;
-    width: 60cqw;
-    height: 60cqh;
+    width: 45cqw;
+}
+.lottie-back-bean {
+    width: 80cqw;
 }
 </style>
