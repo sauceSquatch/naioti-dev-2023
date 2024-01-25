@@ -2,7 +2,7 @@
   <div>
     <HeroSection />
     <Connect />
-    <Footer />
+    <!-- <Footer /> -->
     <!-- <LogosSection /> -->
     <AustinSpace />
   </div>

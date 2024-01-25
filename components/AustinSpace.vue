@@ -58,7 +58,7 @@ export default {
     methods: {
         configureTweens() {
             // get percentage of current width vs max supported width
-            const widthFactor = this.austinToSpace.clientWidth / 1600;
+            const widthFactor = this.austinToSpace.clientWidth / 1200;
 
             this.gsap.set('.city-core', { height: 800 * widthFactor});
 

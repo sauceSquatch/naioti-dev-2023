@@ -78,17 +78,17 @@
     }
     function configureTweens() {
             // get percentage of current width vs max supported width
-            const widthFactor = landingHero.value ? landingHero.value?.clientWidth / 1200 : 0;
+            const widthFactor = landingHero.value ? landingHero.value?.clientWidth / 700 : 0;
             console.log('widthFactor: ', widthFactor);
 
             // this.gsap.set('.city-core', { height: 800 * widthFactor});
 
             const mainTL = gsap.timeline();
-            mainTL.fromTo('.hero-profile-circle', {y: 150 * widthFactor}, { y: -175 * widthFactor});
-            mainTL.fromTo('.hero-profile-pic', {y: -200 * widthFactor}, { y: 90 * widthFactor}, '<');
+            mainTL.fromTo('.hero-profile-circle', {y: 150 * widthFactor}, { y: -95 * widthFactor});
+            mainTL.fromTo('.hero-profile-pic', {y: -200 * widthFactor}, { y: 50 * widthFactor}, '<');
             mainTL.fromTo('.lottie-back-bean', {y: 100 * widthFactor}, { y: 0}, '<');
             mainTL.fromTo('.lottie-mid-bean', {y: 300 * widthFactor}, { y: 50}, '<');
-            mainTL.fromTo('.lottie-top-bean', {y: 300 * widthFactor}, { y: -150}, '<');
+            mainTL.fromTo('.lottie-top-bean', {y: 300 * widthFactor}, { y: -50}, '<');
 
             const childSplit = new splitText('h1', {
                 type: 'lines',
