@@ -73,13 +73,11 @@ export default {
             mainTL.fromTo('.astroid-med2', { y: 1800 * widthFactor, rotation: -170}, { transformOrigin:'25% 25%', y: -200 * widthFactor, rotation: 0}, '<');
             mainTL.fromTo('.astroid-sml1', { y: 3300 * widthFactor, rotation: -620}, { transformOrigin:'25% 25%', y: -1300 * widthFactor, rotation: 180}, '<');
             mainTL.fromTo('.astroid-sml2', { y: 3800 * widthFactor, rotation: -170}, { transformOrigin:'25% 25%', y: 1200 * widthFactor, rotation: 0}, '<');
-
-            
             
             const mainST = this.scrollTrigger.create({
                 animation: mainTL,
                 trigger: '.austin-to-space', 
-                markers: true,
+                // markers: true,
                 scrub: 1.5,
             })
 
@@ -94,7 +92,7 @@ export default {
             const spaceST = this.scrollTrigger.create({
                 animation: spaceTL,
                 trigger: '#space-junk',
-                markers: true,
+                // markers: true,
                 scrub: 5.5,
             })
 

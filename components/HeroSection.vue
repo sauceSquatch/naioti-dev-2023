@@ -1,5 +1,6 @@
 <template>
     <section ref="landingHero" id="landing-hero" class="landing-hero-section">
+        <h1 class="hero-headline"><div class="global--heading-one">Hello</div><div class="global--subheading-one">I am Jamie Naioti</div></h1>
         <div class="hero-profile">
             <img class="hero-profile-circle" src="/images/blue-circle.svg" alt="">
             <img class="hero-profile-pic" src="/images/jamie-profile-landing-hero-lrg.webp" alt="">
@@ -18,7 +19,9 @@
     </section>
 </template>
 <script setup lang="ts">
-    // import gsap from 'gsap'
+    import gsap from 'gsap'
+    import scrollTrigger from 'gsap/dist/ScrollTrigger'
+    import splitText from 'gsap/dist/SplitText';
     import lottie from 'lottie-web'
 
     import lottieBeanTop from '../assets/animations/landing-shape-sml-orange.json'
@@ -75,30 +78,63 @@
     }
     function configureTweens() {
             // get percentage of current width vs max supported width
-            // const widthFactor = this.austinToSpace.clientWidth / 1600;
+            const widthFactor = landingHero.value ? landingHero.value?.clientWidth / 1200 : 0;
+            console.log('widthFactor: ', widthFactor);
 
             // this.gsap.set('.city-core', { height: 800 * widthFactor});
 
-            // const mainTL = this.gsap.timeline();
-            // mainTL.fromTo('.austin-cloud1', {y: 555 * widthFactor}, { y: -600 * widthFactor});
-            // mainTL.fromTo('.austin-cloud2', {y: 450 * widthFactor}, { y: -200 * widthFactor}, '<');
-            // mainTL.fromTo('.austin-treeline', {y: 620 * widthFactor}, { y: 150}, '<');
-            // mainTL.fromTo('.austin-skyline', {y: 560 * widthFactor}, { y: 350 * widthFactor}, '<');
-            // // mainTL.fromTo('.earth-core', {y: 120 * widthFactor}, { y: -50 * widthFactor}, '<');
-            // mainTL.fromTo('.earth-space', {y: -600 * widthFactor}, { y: 0}, '<');
-            // mainTL.fromTo('.astroid-med1', { y: 2300 * widthFactor, rotation: -220}, { transformOrigin:'25% 25%', y: 200 * widthFactor, rotation: 0}, '<');
-            // mainTL.fromTo('.astroid-med2', { y: 1800 * widthFactor, rotation: -170}, { transformOrigin:'25% 25%', y: -200 * widthFactor, rotation: 0}, '<');
-            // mainTL.fromTo('.astroid-sml1', { y: 3300 * widthFactor, rotation: -620}, { transformOrigin:'25% 25%', y: -1300 * widthFactor, rotation: 180}, '<');
-            // mainTL.fromTo('.astroid-sml2', { y: 3800 * widthFactor, rotation: -170}, { transformOrigin:'25% 25%', y: 1200 * widthFactor, rotation: 0}, '<');
+            const mainTL = gsap.timeline();
+            mainTL.fromTo('.hero-profile-circle', {y: 150 * widthFactor}, { y: -175 * widthFactor});
+            mainTL.fromTo('.hero-profile-pic', {y: -200 * widthFactor}, { y: 90 * widthFactor}, '<');
+            mainTL.fromTo('.lottie-back-bean', {y: 100 * widthFactor}, { y: 0}, '<');
+            mainTL.fromTo('.lottie-mid-bean', {y: 300 * widthFactor}, { y: 50}, '<');
+            mainTL.fromTo('.lottie-top-bean', {y: 300 * widthFactor}, { y: -150}, '<');
 
-            
-            
-            // const mainST = this.scrollTrigger.create({
-            //     animation: mainTL,
-            //     trigger: '#austin-to-space', 
-            //     markers: true,
-            //     scrub: 1.5,
-            // })
+            const childSplit = new splitText('h1', {
+                type: 'lines',
+                linesClass: 'split-child',
+            });
+            const parentSplit = new splitText('h1', {
+                type: 'lines',
+                linesClass: 'split-parent',
+            });
+
+            const mainST = scrollTrigger.create({
+                animation: mainTL,
+                trigger: '#landing-hero', 
+                // markers: true,
+                scrub: 1.25,
+                start: "bottom bottom",
+                onEnter: () => {
+                    gsap.from(childSplit.lines, {
+                        duration: 1.25,
+                        yPercent: 100,
+                        ease: 'power4.out',
+                        stagger: 0.1,
+                        delay: 0.5,
+                    })
+                },
+                onLeave: () => {
+                    gsap.to(childSplit.lines, {
+                        duration: .5,
+                        yPercent: 100,
+                        ease: 'power4.out',
+                        stagger: 0.1,
+                    })
+                },
+                onEnterBack: () => {
+                    gsap.fromTo(childSplit.lines, {
+                        duration: 0,
+                        yPercent: 100,
+                    }, {
+                        duration: 1.25,
+                        yPercent: 0,
+                        ease: 'power4.out',
+                        stagger: 0.1,
+                        delay: 0.5,
+                    })
+                },
+            })
     }
 </script>
 <style scoped lang="scss">
@@ -106,7 +142,6 @@
     position: relative;
     display: flex;
     justify-content: center;
-    // align-items: center;
     flex-wrap: nowrap;
     aspect-ratio: 16 / 9;
     container: hero-container / size;
@@ -152,16 +187,29 @@
     position: absolute;
 }
 .lottie-top-bean {
-    bottom: 10%;
+    bottom: 0;
     left: 28%;
     width: 15cqw;
 }
 .lottie-mid-bean {
-    bottom: -50%;
+    bottom: 0;
     left: 8%;
     width: 45cqw;
 }
 .lottie-back-bean {
     width: 80cqw;
+}
+
+.hero-headline {
+    position: absolute;
+
+    z-index: 888;
+    color: $color--brand-blue-light;
+    padding-left: fluid-calc(20px, 160px);
+    width: 100%;
+}
+.global--subheading-one {
+    color: $color--brand-brown-dark;
+    margin-left: fluid-calc(4px, 10px);
 }
 </style>
