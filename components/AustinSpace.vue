@@ -58,21 +58,21 @@ export default {
     methods: {
         configureTweens() {
             // get percentage of current width vs max supported width
-            const widthFactor = this.austinToSpace.clientWidth / 1200;
+            const widthFactor = this.austinToSpace.clientWidth / 1600;
 
             this.gsap.set('.city-core', { height: 800 * widthFactor});
 
             const mainTL = this.gsap.timeline();
             mainTL.fromTo('.austin-cloud1', {y: 555 * widthFactor}, { y: -600 * widthFactor});
             mainTL.fromTo('.austin-cloud2', {y: 450 * widthFactor}, { y: -200 * widthFactor}, '<');
-            mainTL.fromTo('.austin-treeline', {y: 620 * widthFactor}, { y: 150}, '<');
+            mainTL.fromTo('.austin-treeline', {y: 620 * widthFactor}, { y: 100}, '<');
             mainTL.fromTo('.austin-skyline', {y: 560 * widthFactor}, { y: 350 * widthFactor}, '<');
             // mainTL.fromTo('.earth-core', {y: 120 * widthFactor}, { y: -50 * widthFactor}, '<');
             mainTL.fromTo('.earth-space', {y: -600 * widthFactor}, { y: 0}, '<');
-            mainTL.fromTo('.astroid-med1', { y: 2300 * widthFactor, rotation: -220}, { transformOrigin:'25% 25%', y: 200 * widthFactor, rotation: 0}, '<');
-            mainTL.fromTo('.astroid-med2', { y: 1800 * widthFactor, rotation: -170}, { transformOrigin:'25% 25%', y: -200 * widthFactor, rotation: 0}, '<');
+            mainTL.fromTo('.astroid-med1', { y: 6000 * widthFactor, rotation: -220}, { transformOrigin:'25% 25%', y: 100 * widthFactor, rotation: 0}, '<');
+            mainTL.fromTo('.astroid-med2', { y: 1800 * widthFactor, rotation: -290}, { transformOrigin:'25% 25%', y: -200 * widthFactor, rotation: 60}, '<');
             mainTL.fromTo('.astroid-sml1', { y: 3300 * widthFactor, rotation: -620}, { transformOrigin:'25% 25%', y: -1300 * widthFactor, rotation: 180}, '<');
-            mainTL.fromTo('.astroid-sml2', { y: 3800 * widthFactor, rotation: -170}, { transformOrigin:'25% 25%', y: 1200 * widthFactor, rotation: 0}, '<');
+            mainTL.fromTo('.astroid-sml2', { y: 3800 * widthFactor, rotation: -170}, { transformOrigin:'25% 25%', y: 1200 * widthFactor, rotation: 80}, '<');
             
             const mainST = this.scrollTrigger.create({
                 animation: mainTL,
@@ -85,8 +85,8 @@ export default {
             console.log('austinToSpace', this.austinToSpace.clientWidth);
             console.log('austinCloud1', this.austinCloud1.clientWidth);
             const spaceTL = this.gsap.timeline();
-            spaceTL.fromTo('.astroid-core1', { y: -420, rotation: 90}, { transformOrigin:'50% 50%', y: -1200 * widthFactor, rotation: 0}, '<');
-            spaceTL.fromTo('.astroid-big1', { y: 400 * widthFactor, rotation: -90}, { transformOrigin:'25% 25%', y: -200 * widthFactor, rotation: 0}, '<');
+            spaceTL.fromTo('.astroid-core1', { x: 0, y: -800 * widthFactor, rotation: 45}, { transformOrigin:'50% 50%', x: -300 * widthFactor, y: -1200 * widthFactor, rotation: -30}, '<');
+            spaceTL.fromTo('.astroid-big1', { x: 0, y: -300 * widthFactor, rotation: -280}, { transformOrigin:'20% 20%', x: 600 * widthFactor, y: -320 * widthFactor, rotation: -230}, '<');
             spaceTL.fromTo('.astroid-big2', { y: 500 * widthFactor, rotation: 130}, { transformOrigin:'25% 25%', y: -100 * widthFactor, rotation: 0}, '<');
 
             const spaceST = this.scrollTrigger.create({
@@ -166,17 +166,16 @@ export default {
         position: relative;
     }
     .astroid-core1 {
-        width: 50rem;
-        left: -70%;
-        top: -10%;
-        transform: rotate(-6deg); 
-        transform-origin: 25% 25%;
+        width: fluid-calc(250px, 800px);
+        height: fluid-calc(250px, 800px);
+        left: fluid-calc(-100px, -400px);
+        top: fluid-calc(200px, 300px); 
     }
     .astroid-big1 {
-        width: 50%;
-        height: 50%;
-        top: 15%;
-        left: -10%;
+        width: fluid-calc(180px, 900px);
+        height: fluid-calc(180px, 900px);
+        top: 0;
+        right: fluid-calc(-180px, -900px);
     }
     .astroid-big2 {
         width: 65%;
