@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     },
     googleFonts: {
         families: {
-        'Archivo+Narrow': true,
+        'Inter+Tight': true,
         }
       }, 
     css: ['@/assets/styles/main.scss'],
