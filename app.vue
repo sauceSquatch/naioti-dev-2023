@@ -1,6 +1,8 @@
 <template>
   <div>
     <HeroSection />
+    <AboutOverview />
+    <SpliceTest />
     <Connect />
     <!-- <Footer /> -->
     <!-- <LogosSection /> -->
