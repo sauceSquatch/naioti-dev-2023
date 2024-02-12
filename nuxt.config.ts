@@ -1,8 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     modules: [
-        '@nuxt/image-edge',
-        '@nuxtjs/google-fonts'
+        '@nuxt/image-edge'
     ],
     vite: {
         css: {
@@ -13,10 +12,5 @@ export default defineNuxtConfig({
             },
         },
     },
-    googleFonts: {
-        families: {
-        'Inter+Tight': true,
-        }
-      }, 
     css: ['@/assets/styles/main.scss'],
 })
