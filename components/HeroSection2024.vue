@@ -1,0 +1,197 @@
+<template>
+    <section ref="landingHero" id="landing-hero" class="landing-hero-section">
+        <div class="animated-background">
+            <div
+                ref="heroLottieBackBean"
+                class="lottie-bg-item lottie-back-bean"></div>
+            <div
+                ref="heroGradient"
+                class="lottie-bg-item background-gradient"></div>
+        </div>
+        <h1 class="hero-headline"><div class="hero-heading-one">CREATIVE</div><div class="hero-subheading-one">TECHNOLOGIST</div></h1>
+        <div class="hero-about-me">
+            <div class="profile-image-container">
+                <img ref="profileImage" class="profile-image" src="../assets/images/profile-pic-lrg2x.webp" alt="Profile picture of Jamie Naioti" />
+                <img ref="profileImageBg" class="profile-image-bg" src="../assets/images/profile-pic-lrg-bg2x.webp" alt="" />
+            </div>
+            <div class="profile-text-container">
+                <h2>Perpetual prototyper, motion designer, builder, and animator based in Austin, TX</h2>
+                <p>Bridging the gap between creative minds and technology teams has always been my forte. Originating as a designer and animator in the industry, my journey evolved alongside the increasing complexity of interactive experiences. Fueled by my curiosity about how things work, I transitioned into a code-driven engineering role. Despite my extensive coding background, my real fulfillment comes from crafting superior user experiences. I aspire to assume the role of a UI/UX Director, partnering with designers to refine interactive experiences using motion prototyping and delivering precise guidance to technology teams.</p>
+            </div>
+        </div>
+    </section>
+</template>
+<script setup lang="ts">
+    import gsap from 'gsap'
+    import scrollTrigger from 'gsap/dist/ScrollTrigger'
+    import splitText from 'gsap/dist/SplitText';
+    import lottie from 'lottie-web'
+
+    import lottieBeanBack from '../assets/animations/landing-shape-lrg-blue.json'
+
+    const landingHero = ref<HTMLElement | null>(null)
+    const heroLottieBackBean = ref<HTMLElement | null>(null)
+    const heroGradient = ref<HTMLElement | null>(null)
+    const profileImage = ref<HTMLElement | null>(null)
+    const profileImageBg = ref<HTMLElement | null>(null)
+    const lottieObj = lottie
+    const isReducedMotion = ref(true)
+
+    onMounted(() => {
+        // check for isReducedMotion before setting up animations
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+        isReducedMotion.value = mediaQuery.matches
+        console.log('Hero section  | reduced motion value:  ', isReducedMotion.value)
+        if(!isReducedMotion.value) {
+            setupAnimations()
+            configureTweens()
+        }
+    })
+    function setupAnimations() {
+        // lottie setup
+        // ts needs an if otherwise it doesn't trust the ref isn't empty
+        if(heroLottieBackBean.value) {
+            lottieObj.loadAnimation({
+            container: heroLottieBackBean.value, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: lottieBeanBack
+            })
+        }
+    }
+    function configureTweens() {
+            // get percentage of current width vs max supported width
+            const widthFactor = landingHero.value ? landingHero.value?.clientWidth / 900 : 0;
+            console.log('widthFactor: ', widthFactor);
+
+            // this.gsap.set('.city-core', { height: 800 * widthFactor});
+
+            const mainTL = gsap.timeline();
+            mainTL.fromTo(profileImage.value, {y: 300}, { y: -200}, '<');
+            mainTL.fromTo(profileImageBg.value, {y: 50}, { y: -80}, '<');
+            mainTL.fromTo(heroLottieBackBean.value, {y: 100 * widthFactor}, { y: 0}, '<');
+            mainTL.fromTo(heroGradient.value, {y: 300 * widthFactor}, { y: 50}, '<');
+
+            const childSplit = new splitText('h1', {
+                type: 'lines',
+                linesClass: 'split-child',
+            });
+            const parentSplit = new splitText('h1', {
+                type: 'lines',
+                linesClass: 'split-parent',
+            });
+
+            const mainST = scrollTrigger.create({
+                animation: mainTL,
+                trigger: '#landing-hero', 
+                markers: true,
+                scrub: 1.25,
+
+                onEnter: () => {
+                    gsap.from(childSplit.lines, {
+                        duration: 1.25,
+                        yPercent: 100,
+                        opacity: 0.2,
+                        ease: 'power4.inOut',
+                        stagger: 0.1,
+                        delay: 0.5,
+                    })
+                },
+            })
+    }
+</script>
+<style scoped lang="scss">
+.landing-hero-section {
+    position: relative;
+}
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;;
+}
+.lottie-bg-item {
+    position: absolute;
+}
+.lottie-back-bean {
+    width: 80cqw;
+    left: -25%;
+    top: 25%;;
+}
+
+.background-gradient {
+    width: fluid-calc(400px, 800px);
+    height: fluid-calc(400px, 800px);
+    right: -50%;
+
+    background: rgb(209,214,193);
+    background: radial-gradient(circle, rgba(209,214,193,0.65) 0%, rgba(99,159,248,0) 65%);
+}
+
+.hero-headline {
+    // position: absolute;
+    font-family: 'Monument Extended';
+    font-weight: 400;
+    letter-spacing: -.03em;
+    line-height: 0.9;
+    z-index: 888;
+    color: $color--brand-gray-light;
+    font-size: fluid-calc(24px, 110px);
+    text-align: center;
+    width: 100%;
+}
+.hero-subheading-one {
+    color: $color--brand-yellow;
+}
+.hero-about-me {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    @media (min-width: $break-md) {
+        flex-direction: row;
+    }
+}
+
+.profile-image-container {
+    position: relative;
+    top: fluid-calc(40px, 80px);
+}
+.profile-image {
+    position: absolute;
+    max-width: 230px;
+    top: 50px;
+    left: -80px;
+    z-index: 777;
+    @media (min-width: $break-md) {
+        max-width: fluid-calc(230px, 350px);
+    }
+    
+}
+.profile-image-bg {
+    max-width: 180px;
+    @media (min-width: $break-md) {
+        max-width: fluid-calc(200px, 300px);
+    }
+}
+.profile-text-container{
+    max-width: fluid-calc(200px, 480px);
+    transform: translateX(0px);
+    color: $color--brand-gray-light;
+    @media (min-width: $break-md) {
+        transform: translateX(100px);
+    }
+    h2 {
+        font-size: fluid-calc(16px, 24px);
+        line-height: 1.2;
+    }
+    p {
+        font-size: fluid-calc(10px, 14px);
+        line-height: 1.3;
+    }
+}
+</style>

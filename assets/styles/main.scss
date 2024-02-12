@@ -7,100 +7,68 @@ body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     font-family: 'Inter Tight', sans-serif;
-    background-color: #FFFFFF;
+    background-color: $color--brand-blue-80;
 }
 
 // FONTS
-// @font-face {
-//     font-family: 'Chalet-NewYorkNineteenEighty';
-//     font-style: normal;
-//     font-weight: 400;
-//     font-display: swap;
-//     src: url('~/assets/fonts/Chalet-NewYorkNineteenEighty.woff2') format('woff2');
-//     src: url('~/assets/fonts/Chalet-NewYorkNineteenEighty.otf') format('otf');
-//   }
-// @font-face {
-//     font-family: 'Chalet-Book';
-//     font-style: normal;
-//     font-weight: 400;
-//     font-display: swap;
-//     src: url('~/assets/fonts/ChaletBook-Regular.woff2') format('woff2');
-//     src: url('~/assets/fonts/ChaletBook-Regular.otf') format('otf');
-//   }
+@font-face {
+  font-family: 'Monument Extended';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('~/assets/fonts/MonumentExtended-Regular.woff2') format('woff2');
+  src: url('~/assets/fonts/MonumentExtended-Regular.otf') format('otf');
+}
+@font-face {
+  font-family: 'Monument Extended';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('~/assets/fonts/MonumentExtended-Ultralight.woff2') format('woff2');
+  src: url('~/assets/fonts/MonumentExtended-Ultralight.otf') format('otf');
+}
 
-  //TYPOGRAPHY
-  .global--heading-one {
-    letter-spacing: -.03em;
-    line-height: 0.9;
-    margin: 0;
-    // font-family: 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
-    font-weight: 700;
-    font-size: fluid-calc(90px, 160px);
-  }
-  .global--subheading-one {
-    letter-spacing: -.02em;
-    line-height: 0.9;
-    margin: 0;
-    // font-family: 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
-    font-weight: 400;
-    font-size: fluid-calc(24px, 56px);
-  }
-  
-  .global--heading-two {
-    // font-family: 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
-    font-size: fluid-calc(18px, 32px);
-    font-style: italic;
-    letter-spacing: -.01em;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-    font-weight: 800;
-  }
-  
-  .global--heading-three {
-    font-size: 21px;
-    letter-spacing: -.01em;
-    line-height: 1.2;
-    margin: 0;
-    font-weight: 200;
-    @media (min-width: $break-md) {
-      font-size: 36px;
-    }
-    @media (min-width: $break-lg) {
-      font-size: 40px;
-    }
-  }
-  
-  .global--heading-four {
-    font-size: 44px;
-    letter-spacing: -.01em;
-    line-height: 1.2;
-    margin: 0;
-    font-weight: 200;
-    @media (min-width: $break-md) {
-      font-size: 60px;
-    }
-    @media (min-width: $break-lg) {
-      font-size: 70px;
-    }
-  }
+@font-face {
+  font-family: 'Inter Light';
+  font-style: normal;
+  font-display: swap;
+  src: url('~/assets/fonts/Inter-Light.woff2') format('woff2');
+  src: url('~/assets/fonts/Inter-Light.otf') format('otf');
+}
 
-  .split-parent {
-    overflow-y: hidden;
-  }
-  .split-child {
-    display: inline-block;
-  }
+@font-face {
+  font-family: 'Space Grotesk Light';
+  font-style: normal;
+  font-display: swap;
+  src: url('~/assets/fonts/SpaceGrotesk-Light.woff2') format('woff2');
+  src: url('~/assets/fonts/SpaceGrotesk-Light.otf') format('otf');
+}
 
-  //IMAGES
-  picture {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    border: none;
-  }
-  picture img {
-   object-fit: cover; 
-      height: auto;
-      width:100%;
-  }
+h2, h3, h4 {
+  font-family: 'Space Grotesk Light', sans-serif;
+}
+p {
+  font-family: 'Inter Light', sans-serif;
+}
+
+// LAYOUT
+
+.split-parent {
+  overflow-y: hidden;
+}
+.split-child {
+  display: inline-block;
+}
+
+//IMAGES
+picture {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border: none;
+}
+picture img {
+  object-fit: cover; 
+    height: auto;
+    width:100%;
+}

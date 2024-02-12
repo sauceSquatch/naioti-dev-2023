@@ -1,11 +1,11 @@
 <template>
   <div>
-    <HeroSection />
-    <AboutOverview />
-    <SpliceTest />
-    <Connect />
+    <HeroSection2024 />
+    <!-- <AboutOverview /> -->
+    <!-- <SpliceTest /> -->
+    <!-- <Connect /> -->
     <!-- <Footer /> -->
     <!-- <LogosSection /> -->
-    <AustinSpace />
+    <!-- <AustinSpace /> -->
   </div>
 </template>
