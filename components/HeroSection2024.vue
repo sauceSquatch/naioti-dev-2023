@@ -1,12 +1,13 @@
 <template>
     <section ref="landingHero" id="landing-hero" class="landing-hero-section">
         <div class="animated-background">
+            <canvas class="spline" ref="spliceCanvas" />
+            <div
+                ref="heroLottieGradient"
+                class="lottie-bg-item lottie-back-gradient"></div>
             <div
                 ref="heroLottieBackBean"
                 class="lottie-bg-item lottie-back-bean"></div>
-            <div
-                ref="heroGradient"
-                class="lottie-bg-item background-gradient"></div>
         </div>
         <h1 class="hero-headline"><div class="hero-heading-one">CREATIVE</div><div class="hero-subheading-one">TECHNOLOGIST</div></h1>
         <div class="hero-about-me">
@@ -21,23 +22,42 @@
         </div>
     </section>
 </template>
-<script setup lang="ts">
+<script setup>
     import gsap from 'gsap'
     import scrollTrigger from 'gsap/dist/ScrollTrigger'
     import splitText from 'gsap/dist/SplitText';
     import lottie from 'lottie-web'
+    import { Application } from '@splinetool/runtime';
+    const spliceCanvas = ref(null)
 
     import lottieBeanBack from '../assets/animations/landing-shape-lrg-blue.json'
+    import lottieBackGradient from '../assets/animations/landing-shape-lrg-blue-gradient.json'
 
-    const landingHero = ref<HTMLElement | null>(null)
-    const heroLottieBackBean = ref<HTMLElement | null>(null)
-    const heroGradient = ref<HTMLElement | null>(null)
-    const profileImage = ref<HTMLElement | null>(null)
-    const profileImageBg = ref<HTMLElement | null>(null)
+    const landingHero = ref(null)
+    const heroLottieBackBean = ref(null)
+    const heroLottieGradient = ref(null)
+    const profileImage = ref(null)
+    const profileImageBg = ref(null)
     const lottieObj = lottie
     const isReducedMotion = ref(true)
+    const state = reactive({
+        spline: {
+            scene: "https://prod.spline.design/9jgEqXfkzmxr4-Ia/scene.splinecode",
+            app: null,
+            isLoaded: false,
+        },
+    });
+    const splineBlobs = ref(null);
 
-    onMounted(() => {
+    onMounted( async() => {
+        // setup spline
+        const app = new Application(spliceCanvas.value);
+        await app.load(state.spline.scene)
+        splineBlobs.value = app.findObjectByName('allShapes');
+        console.log('splineBlobs', splineBlobs.value);
+        state.spline.app = app;
+        state.spline.isLoaded = true;
+
         // check for isReducedMotion before setting up animations
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
         isReducedMotion.value = mediaQuery.matches
@@ -59,6 +79,15 @@
             animationData: lottieBeanBack
             })
         }
+        if(heroLottieGradient.value) {
+            lottieObj.loadAnimation({
+            container: heroLottieGradient.value, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            animationData: lottieBackGradient
+            })
+        }
     }
     function configureTweens() {
             // get percentage of current width vs max supported width
@@ -68,10 +97,11 @@
             // this.gsap.set('.city-core', { height: 800 * widthFactor});
 
             const mainTL = gsap.timeline();
+            mainTL.fromTo(splineBlobs.value.rotation, {y: 0}, {y: 8}, '<');
             mainTL.fromTo(profileImage.value, {y: 300}, { y: -200}, '<');
             mainTL.fromTo(profileImageBg.value, {y: 50}, { y: -80}, '<');
-            mainTL.fromTo(heroLottieBackBean.value, {y: 100 * widthFactor}, { y: 0}, '<');
-            mainTL.fromTo(heroGradient.value, {y: 300 * widthFactor}, { y: 50}, '<');
+            mainTL.fromTo(heroLottieBackBean.value, {y: 150 * widthFactor}, { y: 0}, '<');
+            mainTL.fromTo(heroLottieGradient.value, {y: 200 * widthFactor}, { y: -50}, '<');
 
             const childSplit = new splitText('h1', {
                 type: 'lines',
@@ -104,6 +134,8 @@
 <style scoped lang="scss">
 .landing-hero-section {
     position: relative;
+    overflow: hidden;
+    padding-bottom: 200px;
 }
 .animated-background {
     position: absolute;
@@ -119,6 +151,12 @@
     width: 80cqw;
     left: -25%;
     top: 25%;;
+}
+
+.lottie-back-gradient {
+    width: 80cqw;
+    right: -45%;
+    top: 25%;
 }
 
 .background-gradient {
