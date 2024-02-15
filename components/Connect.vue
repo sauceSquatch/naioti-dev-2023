@@ -1,11 +1,6 @@
 <template>
     <section class="connect">
-        <a href="https://www.linkedin.com/in/naioti/">
-            <img src="../assets/images/logo-linkedIn-white.svg" class="connect-social-icon">
-        </a>
-        <a href="https://www.instagram.com/naioti/">
-            <img src="../assets/images/logo-instagram-sml.svg" class="connect-social-icon">
-        </a>
+        <img src="../assets/images/FPO-connect.webp" alt="connect">
     </section>
 </template>
 <script>

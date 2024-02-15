@@ -1,6 +1,8 @@
 <template>
   <div>
     <HeroSection2024 />
-    <Clients />
+    <ClientsSection />
+    <WorkSection />
+    <Connect />
   </div>
 </template>

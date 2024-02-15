@@ -37,15 +37,17 @@ body {
 }
 
 @font-face {
-  font-family: 'Space Grotesk Light';
+  font-family: 'Space Grotesk';
   font-style: normal;
+  font-weight: 100;
   font-display: swap;
   src: url('~/assets/fonts/SpaceGrotesk-Light.woff2') format('woff2');
   src: url('~/assets/fonts/SpaceGrotesk-Light.otf') format('otf');
 }
 
 h2, h3, h4 {
-  font-family: 'Space Grotesk Light', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 100;;
 }
 p {
   font-family: 'Inter Light', sans-serif;

@@ -1,0 +1,46 @@
+{
+    "work": [
+    {
+      "title": "Patron",
+      "coverImage": "client-slide-grey-goose-01.webp",
+      "coverImageAlt": "alt image description",
+      "description": "Website / CMS / Prototyping",
+      "slides": []
+    },
+    {
+      "title": "Grey Goose",
+      "coverImage": "client-slide-patron-01.webp",
+      "coverImageAlt": "alt image description",
+      "description": "Website / CMS / Prototyping",
+      "slides": []
+    },
+    {
+      "title": "Supernal",
+      "coverImage": "client-slide-patron-01.webp",
+      "coverImageAlt": "alt image description",
+      "description": "This is Supernal.",
+      "slides": []
+    },
+    {
+      "title": "Citi",
+      "coverImage": "client-slide-patron-01.webp",
+      "coverImageAlt": "alt image description",
+      "description": "This is Citi.",
+      "slides": []
+    },
+    {
+      "title": "Xbox",
+      "coverImage": "client-slide-patron-01.webp",
+      "coverImageAlt": "alt image description",
+      "description": "This is client 5.",
+      "slides": []
+    },
+    {
+      "title": "Client 6",
+      "coverImage": "client-slide-patron-01.webp",
+      "coverImageAlt": "alt image description",
+      "description": "This is client 6.",
+      "slides": []
+    }
+  ]
+}

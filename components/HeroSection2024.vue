@@ -97,7 +97,7 @@
             // this.gsap.set('.city-core', { height: 800 * widthFactor});
 
             const mainTL = gsap.timeline();
-            mainTL.fromTo(splineBlobs.value.rotation, {y: 0}, {y: 8}, '<');
+            mainTL.fromTo(splineBlobs.value.rotation, {y: 0}, {y: -3}, '<');
             mainTL.fromTo(profileImage.value, {y: 300}, { y: -200}, '<');
             mainTL.fromTo(profileImageBg.value, {y: 50}, { y: -80}, '<');
             mainTL.fromTo(heroLottieBackBean.value, {y: 150 * widthFactor}, { y: 0}, '<');
@@ -115,7 +115,7 @@
             const mainST = scrollTrigger.create({
                 animation: mainTL,
                 trigger: '#landing-hero', 
-                markers: true,
+                // markers: true,
                 scrub: 1.25,
 
                 onEnter: () => {
