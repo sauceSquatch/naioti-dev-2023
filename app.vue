@@ -3,6 +3,6 @@
     <HeroSection2024 />
     <ClientsSection />
     <WorkSection />
-    <Connect />
+    <ConnectSection />
   </div>
 </template>

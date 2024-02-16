@@ -16,7 +16,6 @@ export default {
         justify-content: center;
         align-items: center;
         height: 12rem;
-        background-color: white;
     }
     .connect-social-icon {
         width: 4rem;
