@@ -79,7 +79,7 @@ function configureTweens() {
         position: absolute;
         top: 50%;
         width: 45%;
-        font-size: fluid-calc(1rem, 2rem);
+        font-size: fluid-calc(16px, 32px);
         line-height: 1.1;
         color: $color--brand-blue-90;
     }

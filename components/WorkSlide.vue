@@ -37,5 +37,11 @@ defineProps<{
     .slide-description {
         font-size: fluid-calc(0.75rem, 1.5rem);
         color: $color--brand-blue-20;
+        margin: 4px 0;
+    }
+    .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 </style>

@@ -1,6 +1,12 @@
 <template>
     <section ref="workSection" class="work-section" id="work">
-        <div class="work-container">
+        <div class="background">
+            <img class="elipse-dotted" src="~/assets/images/work-elipse-dotted.svg" alt="">
+            <img class="elipse-open" src="~/assets/images/work-elipse-open.svg" alt="">
+            <img class="elipse-half" src="~/assets/images/work-elipse-half.svg" alt="">
+            <img class="elipse-quarter" src="~/assets/images/work-elipse-quarter.svg" alt="">
+        </div>
+        <div class="work-slides-container">
             <h3 class="work-headline">WORK</h3>
             <div ref="workSlides" class="work-slides">
                 <WorkSlide v-for="(client, key) in caseStudies.work"
@@ -44,6 +50,10 @@ function configureTweens() {
         xPercent: -100 * (slides.length - 1),
         ease: 'none',
     })
+    workTL.to(".elipse-dotted", { rotation: 360, ease: "none"}, '<')
+    workTL.fromTo(".elipse-open", { rotation: -180, ease: "none"}, { rotation:45 }, '<')
+    workTL.fromTo(".elipse-half", { rotation: -55, ease: "none"}, { rotation:45 }, '<')
+    workTL.to(".elipse-quarter", { rotation: 45, ease: "none"}, '<')
 
     scrollTrigger.create({
         trigger: workSection.value,
@@ -51,7 +61,7 @@ function configureTweens() {
         scrub: true,
         pin: true,
         snap: 1 / (slides.length - 1),
-        markers: true,
+        // markers: true,
         end: () => '+=' + workSlides.value?.offsetWidth,
     });
 
@@ -68,7 +78,7 @@ function configureTweens() {
         flex-direction: column-reverse;
         justify-content: center;
         container-name: worksection;
-        overflow-x: hidden;
+        overflow: hidden;
 
         @media (min-width: $break-md) {
             // padding: 3.75rem 0;
@@ -83,7 +93,7 @@ function configureTweens() {
         color: $color--brand-blue-60;
         margin: 0;
     }
-    .work-container {
+    .work-slides-container {
         position: relative;
         width: 100%;
         height: 40cqw;
@@ -109,5 +119,36 @@ function configureTweens() {
         @media (min-width: $break-md) {
             width: 33.333cqw;
         }
+    }
+    .background {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;;
+        top: fluid-calc(-220px, -20px);
+        right: -10cqw;
+        width: 400px;
+        height: 400px;
+        z-index: -1;
+    }
+    .elipse-dotted {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    .elipse-open {
+        position: absolute;
+        height: 90%;
+        width: 90%;
+    }
+    .elipse-half {
+        position: absolute;
+        height: 80%;
+        width: 80%;
+    }
+    .elipse-quarter {
+        position: absolute;
+        height: 80%;
+        width: 80%;
     }
 </style>
