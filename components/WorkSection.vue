@@ -53,7 +53,7 @@ function configureTweens() {
     workTL.to(".elipse-dotted", { rotation: 360, ease: "none"}, '<')
     workTL.fromTo(".elipse-open", { rotation: -180, ease: "none"}, { rotation:45 }, '<')
     workTL.fromTo(".elipse-half", { rotation: -55, ease: "none"}, { rotation:45 }, '<')
-    workTL.to(".elipse-quarter", { rotation: 45, ease: "none"}, '<')
+    workTL.to(".elipse-quarter", { rotation: 125, ease: "none"}, '<')
 
     scrollTrigger.create({
         trigger: workSection.value,
@@ -125,7 +125,7 @@ function configureTweens() {
         display: flex;
         justify-content: center;
         align-items: center;;
-        top: fluid-calc(-220px, -20px);
+        top: -60px;
         right: -10cqw;
         width: 400px;
         height: 400px;
@@ -148,7 +148,8 @@ function configureTweens() {
     }
     .elipse-quarter {
         position: absolute;
-        height: 80%;
-        width: 80%;
+        height: 90%;
+        width: 90%;
+        opacity: 0.1;
     }
 </style>

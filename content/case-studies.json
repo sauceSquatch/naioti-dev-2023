@@ -16,28 +16,42 @@
     },
     {
       "title": "Supernal",
-      "coverImage": "client-slide-patron-01.webp",
+      "coverImage": "client-slide-supernal.webp",
       "coverImageAlt": "alt image description",
       "description": "This is Supernal.",
       "slides": []
     },
     {
-      "title": "Citi",
-      "coverImage": "client-slide-patron-01.webp",
+      "title": "CVS",
+      "coverImage": "client-slide-cvs.webp",
       "coverImageAlt": "alt image description",
       "description": "This is Citi.",
       "slides": []
     },
     {
-      "title": "Xbox",
-      "coverImage": "client-slide-patron-01.webp",
+      "title": "Citi",
+      "coverImage": "client-slide-Citi.webp",
+      "coverImageAlt": "alt image description",
+      "description": "This is Citi.",
+      "slides": []
+    },
+    {
+      "title": "Entergy",
+      "coverImage": "client-slide-entergy.webp",
       "coverImageAlt": "alt image description",
       "description": "This is client 5.",
       "slides": []
     },
     {
-      "title": "Client 6",
-      "coverImage": "client-slide-patron-01.webp",
+      "title": "XBOX",
+      "coverImage": "client-slide-xbox.webp",
+      "coverImageAlt": "alt image description",
+      "description": "This is client 5.",
+      "slides": []
+    },
+    {
+      "title": "Southwest",
+      "coverImage": "client-slide-southwest.webp",
       "coverImageAlt": "alt image description",
       "description": "This is client 6.",
       "slides": []

@@ -1,8 +1,11 @@
 <template>
   <div>
     <HeroSection2024 />
-    <ClientsSection />
-    <WorkSection />
-    <ConnectSection />
+    <LazyClientsSection />
+    <LazyWorkSection />
+    <LazyConnectSection />
   </div>
 </template>
+<script setup lang="ts">
+
+</script>
