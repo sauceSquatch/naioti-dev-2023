@@ -11,7 +11,7 @@
                 class="connect-social-button">
                 <img class="connect-social-icon" src="../assets/images/social-icon-LinkedIn.svg" alt="linkedin">
             </a>
-            <a href="https://www.instagram/naioti"
+            <a href="https://www.instagram.com/naioti"
                 target="_blank"
                 rel="external"
                 class="connect-social-button">
@@ -47,17 +47,17 @@ onMounted(() => {
 })
 function configureTweens() {
 
-    const mainTL = gsap.timeline();
-    mainTL.fromTo(contactHeader1.value, {autoAlpha:0, x: '-120px'}, {autoAlpha:1, x: '-60px', duration: 1, ease: 'power3.out'});
-    mainTL.fromTo(contactHeader2.value, {autoAlpha:0, x: '120px'}, {autoAlpha:1, x: '60px', duration: 1.25, ease: 'power3.out'}, '<');
+    const connectTL = gsap.timeline();
+    connectTL.fromTo(contactHeader1.value, {autoAlpha:0, x: '-120px'}, {autoAlpha:1, x: '-60px', duration: 1, ease: 'power3.out'});
+    connectTL.fromTo(contactHeader2.value, {autoAlpha:0, x: '120px'}, {autoAlpha:1, x: '60px', duration: 1.25, ease: 'power3.out'}, '<');
 
-    const mainST = scrollTrigger.create({
-                animation: mainTL,
-                trigger: connectSection.value, 
-                // markers: true,
-                start: 'top 65%',
-                end: 'center 12%',
-                toggleActions: 'play reverse play reverse'})
+    scrollTrigger.create({
+        animation: connectTL,
+        trigger: connectSection.value, 
+        markers: true,
+        start: 'top center',
+        end: 'center 12%',
+        toggleActions: 'play reverse play reverse'})
 }
 </script>
 <style lang="scss">
