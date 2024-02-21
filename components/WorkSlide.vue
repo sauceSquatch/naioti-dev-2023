@@ -43,5 +43,6 @@ defineProps<{
         width: 100%;
         height: 100%;
         object-fit: cover;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);;
     }
 </style>

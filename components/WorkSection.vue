@@ -3,11 +3,11 @@
         <div class="background">
             <img class="elipse-dotted" src="~/assets/images/work-elipse-dotted.svg" alt="">
             <img class="elipse-open" src="~/assets/images/work-elipse-open.svg" alt="">
-            <img class="elipse-half" src="~/assets/images/work-elipse-half.svg" alt="">
             <img class="elipse-quarter" src="~/assets/images/work-elipse-quarter.svg" alt="">
         </div>
         <div class="work-slides-container">
-            <h3 class="work-headline">WORK</h3>
+            <h3 ref="workHeadline" class="work-headline">WORK</h3>
+            <div class="work-headline-dash" />
             <div ref="workSlides" class="work-slides">
                 <WorkSlide v-for="(client, key) in caseStudies.work"
                     :key="client.title"
@@ -32,7 +32,12 @@ import caseStudies from '~/content/case-studies.json'
 
 const workSlides = ref<HTMLElement | null>(null)
 const workSection = ref<HTMLElement | null>(null)
-const isReducedMotion = ref(true)
+const workHeadline = ref<HTMLElement | null>(null)
+
+const emit = defineEmits(['hasScrolled'])
+let hasScrolled = false;
+
+
 
 onMounted(() => {
     configureTweens()
@@ -42,7 +47,6 @@ onUpdated(() => {
     console.log('updated')
 })
 function configureTweens() {
-    console.log('configuring tweens');
     const slides = gsap.utils.toArray('.work-slide')
     
     const workTL = gsap.timeline();
@@ -50,10 +54,16 @@ function configureTweens() {
         xPercent: -100 * (slides.length - 1),
         ease: 'none',
     })
+    let headlineWidth = workHeadline.value ? workHeadline.value.offsetWidth : 0;
+    let headlineHeight = workHeadline.value ? workHeadline.value.offsetHeight : 0;
+    console.log('headlineHeight: ', headlineHeight);
+    
+    gsap.set('.work-headline-dash', { y: headlineHeight})
     workTL.to(".elipse-dotted", { rotation: 360, ease: "none"}, '<')
     workTL.fromTo(".elipse-open", { rotation: -180, ease: "none"}, { rotation:45 }, '<')
-    workTL.fromTo(".elipse-half", { rotation: -55, ease: "none"}, { rotation:45 }, '<')
-    workTL.to(".elipse-quarter", { rotation: 125, ease: "none"}, '<')
+    workTL.to(".elipse-quarter", { rotation: 300, ease: "none"}, '<')
+    workTL.fromTo(workHeadline.value, { x: 150 }, { x: -60 }, '<')
+    workTL.fromTo('.work-headline-dash', { x: (headlineWidth + 120) }, { x: 0 }, '<')
 
     scrollTrigger.create({
         trigger: workSection.value,
@@ -61,11 +71,21 @@ function configureTweens() {
         scrub: true,
         pin: true,
         snap: 1 / (slides.length - 1),
+        onToggle: (self) => scrollToggle(),
         // markers: true,
         end: () => '+=' + workSlides.value?.offsetWidth,
     });
 
-    console.log('workSlides.value?.offsetWidth: ', workSlides.value?.offsetWidth)
+}
+function scrollToggle() {
+    console.log('scrolled: ', hasScrolled)
+
+    if(!hasScrolled) {
+        console.log('emitting')
+
+        hasScrolled = true
+        emit('hasScrolled', true)
+    }
 
 }
 </script>
@@ -87,11 +107,17 @@ function configureTweens() {
     .work-headline {
         position: absolute;
         top: fluid-calc(100px, 200px);
-        left: -4rem;
         font-family: 'Monument Extended';
         font-size: fluid-calc(80px, 200px);
         color: $color--brand-blue-60;
         margin: 0;
+    }
+    .work-headline-dash {
+        position: absolute;
+        top: fluid-calc(160px, 260px);
+        height: 2px;
+        width: 20px;
+        background-color: $color--brand-yellow;
     }
     .work-slides-container {
         position: relative;
