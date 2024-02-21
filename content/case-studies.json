@@ -1,14 +1,14 @@
 {
     "work": [
     {
-      "title": "Patron",
+      "title": "Grey Goose",
       "coverImage": "client-slide-grey-goose-01.webp",
       "coverImageAlt": "alt image description",
-      "description": "Website / CMS / Prototyping",
+      "description": "Website / CMS",
       "slides": []
     },
     {
-      "title": "Grey Goose",
+      "title": "Patrón",
       "coverImage": "client-slide-patron-01.webp",
       "coverImageAlt": "alt image description",
       "description": "Website / CMS / Prototyping",
@@ -18,42 +18,42 @@
       "title": "Supernal",
       "coverImage": "client-slide-supernal.webp",
       "coverImageAlt": "alt image description",
-      "description": "This is Supernal.",
+      "description": "Website / Motion Design / Prototyping",
       "slides": []
     },
     {
       "title": "CVS",
       "coverImage": "client-slide-cvs.webp",
       "coverImageAlt": "alt image description",
-      "description": "This is Citi.",
+      "description": "Website / AEM / Accessibility",
       "slides": []
     },
     {
       "title": "Citi",
       "coverImage": "client-slide-Citi.webp",
       "coverImageAlt": "alt image description",
-      "description": "This is Citi.",
+      "description": "Cloud Application / Prototyping / Consulting",
       "slides": []
     },
     {
       "title": "Entergy",
       "coverImage": "client-slide-entergy.webp",
       "coverImageAlt": "alt image description",
-      "description": "This is client 5.",
+      "description": "Website / Motion Design",
       "slides": []
     },
     {
       "title": "XBOX",
       "coverImage": "client-slide-xbox.webp",
       "coverImageAlt": "alt image description",
-      "description": "This is client 5.",
+      "description": "Website / Motion Design",
       "slides": []
     },
     {
       "title": "Southwest",
       "coverImage": "client-slide-southwest.webp",
       "coverImageAlt": "alt image description",
-      "description": "This is client 6.",
+      "description": "Website / Motion Design / Consulting",
       "slides": []
     }
   ]

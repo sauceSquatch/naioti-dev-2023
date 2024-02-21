@@ -7,7 +7,7 @@
         </div>
         <div class="work-slides-container">
             <h3 ref="workHeadline" class="work-headline">WORK</h3>
-            <div class="work-headline-dash" />
+            <div ref="workHeadlineDash" class="work-headline-dash" />
             <div ref="workSlides" class="work-slides">
                 <WorkSlide v-for="(client, key) in caseStudies.work"
                     :key="client.title"
@@ -33,6 +33,8 @@ import caseStudies from '~/content/case-studies.json'
 const workSlides = ref<HTMLElement | null>(null)
 const workSection = ref<HTMLElement | null>(null)
 const workHeadline = ref<HTMLElement | null>(null)
+const workHeadlineDash = ref<HTMLElement | null>(null)
+
 
 const emit = defineEmits(['hasScrolled'])
 let hasScrolled = false;
@@ -46,6 +48,22 @@ onMounted(() => {
 onUpdated(() => {
     console.log('updated')
 })
+
+let headlineWidth = computed(() => {
+    if(workHeadline.value) {
+        return workHeadline.value.offsetWidth
+    }
+    return 0
+})
+let headlineHeight = computed(() => {
+    if(workHeadline.value) {
+        return workHeadline.value.offsetHeight
+    }
+    return 0
+}) 
+
+
+
 function configureTweens() {
     const slides = gsap.utils.toArray('.work-slide')
     
@@ -54,27 +72,26 @@ function configureTweens() {
         xPercent: -100 * (slides.length - 1),
         ease: 'none',
     })
-    let headlineWidth = workHeadline.value ? workHeadline.value.offsetWidth : 0;
-    let headlineHeight = workHeadline.value ? workHeadline.value.offsetHeight : 0;
-    console.log('headlineHeight: ', headlineHeight);
     
-    gsap.set('.work-headline-dash', { y: headlineHeight})
-    workTL.to(".elipse-dotted", { rotation: 360, ease: "none"}, '<')
-    workTL.fromTo(".elipse-open", { rotation: -180, ease: "none"}, { rotation:45 }, '<')
-    workTL.to(".elipse-quarter", { rotation: 300, ease: "none"}, '<')
-    workTL.fromTo(workHeadline.value, { x: 150 }, { x: -60 }, '<')
-    workTL.fromTo('.work-headline-dash', { x: (headlineWidth + 120) }, { x: 0 }, '<')
+    if(workHeadline.value) {
+        gsap.set(workHeadlineDash.value, { y: () => Number(gsap.getProperty('.work-headline', 'height')) })
+        workTL.to(".elipse-dotted", { rotation: 360, ease: "none"}, '<')
+        workTL.fromTo(".elipse-open", { rotation: -180, ease: "none"}, { rotation:45 }, '<')
+        workTL.to(".elipse-quarter", { rotation: 300, ease: "none"}, '<')
+        workTL.fromTo(workHeadline.value, { x: 150 }, { x: -60 }, '<')
+        workTL.fromTo('.work-headline-dash', { x: () => Number(gsap.getProperty('.work-headline', 'width')) + 120 }, { x: 0 }, '<')
 
-    scrollTrigger.create({
-        trigger: workSection.value,
-        animation: workTL,
-        scrub: true,
-        pin: true,
-        snap: 1 / (slides.length - 1),
-        onToggle: (self) => scrollToggle(),
-        // markers: true,
-        end: () => '+=' + workSlides.value?.offsetWidth,
-    });
+        scrollTrigger.create({
+            trigger: workSection.value,
+            animation: workTL,
+            scrub: true,
+            pin: true,
+            snap: 1 / (slides.length - 1),
+            onToggle: (self) => scrollToggle(),
+            invalidateOnRefresh: true,
+            end: () => '+=' + workSlides.value?.offsetWidth,
+        });
+    }
 
 }
 function scrollToggle() {
@@ -138,7 +155,7 @@ function scrollToggle() {
         container-name: slides-container;
     }
     .work-slide {
-        width: 50cqw;
+        width: 66.666cqw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -151,11 +168,17 @@ function scrollToggle() {
         display: flex;
         justify-content: center;
         align-items: center;;
-        top: -60px;
-        right: -10cqw;
-        width: 400px;
-        height: 400px;
+        top: 60px;
+        right: -100px;
+        width: 200px;
+        height: 200px;
         z-index: -1;
+        @media (min-width: $break-md) {
+            top: 120px;
+            right: -200px;
+            width: 420px;
+            height: 420px;
+        }
     }
     .elipse-dotted {
         position: absolute;

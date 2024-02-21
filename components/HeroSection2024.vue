@@ -91,24 +91,6 @@
         }
     }
     function revealUI() {
-        introTL.to(landingHero.value, {autoAlpha: 1, duration: 1.5, ease: 'power2.in'})
-        introTL.from(profileImage.value, {autoAlpha:0, x: -60, duration: 0.95, ease: 'power3.out'})
-        introTL.from(profileImageBg.value, {autoAlpha:0, x: -25, duration: 1.15, ease: 'power3.out'}, '<')
-        introTL.from('.profile-text-container h2', {autoAlpha: 0, y: 50, duration: 0.95, ease: 'power3.out'}, '<')
-        introTL.from('.profile-text-container p', {autoAlpha: 0, y: 40, duration: 0.95, ease: 'power3.out', onComplete:configureTweens()}, '<0.15')
-    }
-    function configureTweens() {
-        // get percentage of current width vs max supported width
-        const widthFactor = landingHero.value ? landingHero.value?.clientWidth / 900 : 0;
-        console.log('widthFactor: ', widthFactor);
-
-        // this.gsap.set('.city-core', { height: 800 * widthFactor});
-        mainTL.fromTo(splineBlobs.value.rotation, {y: 1}, {y: -3}, '<');
-        mainTL.fromTo(profileImage.value, {y: 300}, { y: -200}, '<');
-        mainTL.fromTo(profileImageBg.value, {y: 50}, { y: -80}, '<');
-        mainTL.fromTo(heroLottieBackBean.value, {y: 150 * widthFactor}, { y: 0}, '<');
-        mainTL.fromTo(heroLottieGradient.value, {y: 200 * widthFactor}, { y: -50}, '<');
-
         const childSplit = new splitText('h1', {
             type: 'lines',
             linesClass: 'split-child',
@@ -117,23 +99,40 @@
             type: 'lines',
             linesClass: 'split-parent',
         });
+        gsap.set(profileImage.value, {y: '2%'})
+        gsap.set(heroLottieBackBean.value, {y: 150})
+        gsap.set(heroLottieGradient.value, {y: 200})
+        introTL.to(landingHero.value, {autoAlpha: 1, duration: 1.5, ease: 'power2.in'})
+        introTL.from(childSplit.lines, {
+                    duration: 1.25,
+                    yPercent: 100,
+                    opacity: 0.2,
+                    ease: 'power3.inOut',
+                    stagger: 0.1,
+                })
+        introTL.from(profileImage.value, {autoAlpha:0, x: -60, duration: 0.95, ease: 'power3.out'}, '<1')
+        introTL.from(profileImageBg.value, {autoAlpha:0, x: -25, duration: 1.15, ease: 'power3.out'}, '<')
+        introTL.from('.profile-text-container h2', {autoAlpha: 0, y: 50, duration: 0.95, ease: 'power3.out'}, '<')
+        introTL.from('.profile-text-container p', {autoAlpha: 0, y: 40, duration: 0.95, ease: 'power3.out', onComplete:configureTweens()}, '<0.15')
+    }
+    function configureTweens() {
+        // get percentage of current width vs max supported width
+        mainTL.to(splineBlobs.value.rotation, {y: -0.3}, '<');
+        mainTL.fromTo(profileImage.value, {y: '2%'}, { y: '-40%'}, '<');
+        mainTL.fromTo(profileImageBg.value, {y: 0}, { y: -80}, '<');
+        mainTL.fromTo(heroLottieBackBean.value, {y: 150}, { y: -100}, '<');
+        mainTL.fromTo(heroLottieGradient.value, {y: 200}, { y: -250}, '<');
 
         const mainST = scrollTrigger.create({
             animation: mainTL,
             trigger: '#landing-hero', 
             // markers: true,
-            scrub: 1.25,
+            invalidateOnRefresh: true,
 
-            onEnter: () => {
-                gsap.from(childSplit.lines, {
-                    duration: 1.25,
-                    yPercent: 100,
-                    opacity: 0.2,
-                    ease: 'power4.inOut',
-                    stagger: 0.1,
-                    delay: 0.5,
-                })
-            },
+            start: '5% top',
+            end: 'bottom 30%',
+            scrub: 1.25,
+            // onUpdate: self => console.log("progress", self.progress),
         })
     }
 </script>
@@ -141,6 +140,7 @@
 .landing-hero-section {
     position: relative;
     overflow: hidden;
+    padding-top: fluid-calc(10px, 30px);
     padding-bottom: fluid-calc(100px, 300px);
     opacity: 0;
 }
@@ -183,9 +183,10 @@
     line-height: 0.9;
     z-index: 888;
     color: $color--brand-gray-light;
-    font-size: fluid-calc(24px, 110px);
+    font-size: fluid-calc(24px, 100px);
     text-align: center;
     width: 100%;
+    margin-bottom: 0;
 }
 .hero-subheading-one {
     color: $color--brand-yellow;
@@ -208,7 +209,7 @@
 }
 .profile-image {
     position: absolute;
-    max-width: 230px;
+    max-width: 210px;
     top: 50px;
     left: -80px;
     z-index: 777;
@@ -218,7 +219,7 @@
     
 }
 .profile-image-bg {
-    max-width: 180px;
+    max-width: 190px;
     @media (min-width: $break-md) {
         max-width: fluid-calc(200px, 300px);
     }

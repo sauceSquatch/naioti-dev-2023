@@ -54,7 +54,7 @@ function configureTweens() {
     scrollTrigger.create({
         animation: connectTL,
         trigger: connectSection.value, 
-        markers: true,
+        // markers: true,
         start: 'top center',
         end: 'center 12%',
         toggleActions: 'play reverse play reverse'})
@@ -68,6 +68,9 @@ function configureTweens() {
     align-items: center;
     padding: 2rem 0 10rem 0;
     width: 100%;
+    @media (min-width: $break-md) {
+        padding: 3rem 0 16rem 0;
+    }
 }
 .connect-social-icon {
     height: fluid-calc(14px, 24px);
