@@ -48,23 +48,24 @@
         },
     });
     const splineBlobs = ref(null);
+    const mainTL = gsap.timeline();
+    const introTL = gsap.timeline();
+
 
     onMounted( async() => {
         // setup spline
         const app = new Application(spliceCanvas.value);
         await app.load(state.spline.scene)
         splineBlobs.value = app.findObjectByName('allShapes');
-        console.log('splineBlobs', splineBlobs.value);
         state.spline.app = app;
         state.spline.isLoaded = true;
 
         // check for isReducedMotion before setting up animations
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
         isReducedMotion.value = mediaQuery.matches
-        console.log('Hero section  | reduced motion value:  ', isReducedMotion.value)
         if(!isReducedMotion.value) {
             setupAnimations()
-            configureTweens()
+            revealUI()
         }
     })
     function setupAnimations() {
@@ -89,53 +90,59 @@
             })
         }
     }
+    function revealUI() {
+        introTL.to(landingHero.value, {autoAlpha: 1, duration: 1.5, ease: 'power2.in'})
+        introTL.from(profileImage.value, {autoAlpha:0, x: -60, duration: 0.95, ease: 'power3.out'})
+        introTL.from(profileImageBg.value, {autoAlpha:0, x: -25, duration: 1.15, ease: 'power3.out'}, '<')
+        introTL.from('.profile-text-container h2', {autoAlpha: 0, y: 50, duration: 0.95, ease: 'power3.out'}, '<')
+        introTL.from('.profile-text-container p', {autoAlpha: 0, y: 40, duration: 0.95, ease: 'power3.out', onComplete:configureTweens()}, '<0.15')
+    }
     function configureTweens() {
-            // get percentage of current width vs max supported width
-            const widthFactor = landingHero.value ? landingHero.value?.clientWidth / 900 : 0;
-            console.log('widthFactor: ', widthFactor);
+        // get percentage of current width vs max supported width
+        const widthFactor = landingHero.value ? landingHero.value?.clientWidth / 900 : 0;
+        console.log('widthFactor: ', widthFactor);
 
-            // this.gsap.set('.city-core', { height: 800 * widthFactor});
+        // this.gsap.set('.city-core', { height: 800 * widthFactor});
+        mainTL.fromTo(splineBlobs.value.rotation, {y: 1}, {y: -3}, '<');
+        mainTL.fromTo(profileImage.value, {y: 300}, { y: -200}, '<');
+        mainTL.fromTo(profileImageBg.value, {y: 50}, { y: -80}, '<');
+        mainTL.fromTo(heroLottieBackBean.value, {y: 150 * widthFactor}, { y: 0}, '<');
+        mainTL.fromTo(heroLottieGradient.value, {y: 200 * widthFactor}, { y: -50}, '<');
 
-            const mainTL = gsap.timeline();
-            mainTL.fromTo(splineBlobs.value.rotation, {y: 0}, {y: -3}, '<');
-            mainTL.fromTo(profileImage.value, {y: 300}, { y: -200}, '<');
-            mainTL.fromTo(profileImageBg.value, {y: 50}, { y: -80}, '<');
-            mainTL.fromTo(heroLottieBackBean.value, {y: 150 * widthFactor}, { y: 0}, '<');
-            mainTL.fromTo(heroLottieGradient.value, {y: 200 * widthFactor}, { y: -50}, '<');
+        const childSplit = new splitText('h1', {
+            type: 'lines',
+            linesClass: 'split-child',
+        });
+        const parentSplit = new splitText('h1', {
+            type: 'lines',
+            linesClass: 'split-parent',
+        });
 
-            const childSplit = new splitText('h1', {
-                type: 'lines',
-                linesClass: 'split-child',
-            });
-            const parentSplit = new splitText('h1', {
-                type: 'lines',
-                linesClass: 'split-parent',
-            });
+        const mainST = scrollTrigger.create({
+            animation: mainTL,
+            trigger: '#landing-hero', 
+            // markers: true,
+            scrub: 1.25,
 
-            const mainST = scrollTrigger.create({
-                animation: mainTL,
-                trigger: '#landing-hero', 
-                // markers: true,
-                scrub: 1.25,
-
-                onEnter: () => {
-                    gsap.from(childSplit.lines, {
-                        duration: 1.25,
-                        yPercent: 100,
-                        opacity: 0.2,
-                        ease: 'power4.inOut',
-                        stagger: 0.1,
-                        delay: 0.5,
-                    })
-                },
-            })
+            onEnter: () => {
+                gsap.from(childSplit.lines, {
+                    duration: 1.25,
+                    yPercent: 100,
+                    opacity: 0.2,
+                    ease: 'power4.inOut',
+                    stagger: 0.1,
+                    delay: 0.5,
+                })
+            },
+        })
     }
 </script>
 <style scoped lang="scss">
 .landing-hero-section {
     position: relative;
     overflow: hidden;
-    padding-bottom: 200px;
+    padding-bottom: fluid-calc(100px, 300px);
+    opacity: 0;
 }
 .animated-background {
     position: absolute;
@@ -217,9 +224,13 @@
     }
 }
 .profile-text-container{
-    max-width: fluid-calc(200px, 480px);
+    max-width: 80%;
     transform: translateX(0px);
+    transform: translateY(50px);
     color: $color--brand-gray-light;
+    @media (min-width: $break-sm) {
+        max-width: fluid-calc(200px, 480px);
+    }
     @media (min-width: $break-md) {
         transform: translateX(100px);
     }
