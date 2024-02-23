@@ -16,7 +16,8 @@
                 <img ref="profileImageBg" class="profile-image-bg" src="../assets/images/profile-pic-lrg-bg2x.webp" alt="" />
             </div>
             <div class="profile-text-container">
-                <h2>Perpetual prototyper, motion designer, builder, and animator based in Austin, TX</h2>
+                <h2>Jamie Naioti</h2>
+                <h3>Perpetual prototyper, motion designer, builder, and animator based in Austin, TX</h3>
                 <p>Bridging the gap between creative minds and technology teams has always been my forte. Originating as a designer and animator in the industry, my journey evolved alongside the increasing complexity of interactive experiences. Fueled by my curiosity about how things work, I transitioned into a code-driven engineering role. Despite my extensive coding background, my real fulfillment comes from crafting superior user experiences. I aspire to assume the role of a UI/UX Director, partnering with designers to refine interactive experiences using motion prototyping and delivering precise guidance to technology teams.</p>
             </div>
         </div>
@@ -112,16 +113,17 @@
                 })
         introTL.from(profileImage.value, {autoAlpha:0, x: -60, duration: 0.95, ease: 'power3.out'}, '<1')
         introTL.from(profileImageBg.value, {autoAlpha:0, x: -25, duration: 1.15, ease: 'power3.out'}, '<')
-        introTL.from('.profile-text-container h2', {autoAlpha: 0, y: 50, duration: 0.95, ease: 'power3.out'}, '<')
+        introTL.from('.profile-text-container h2', {autoAlpha: 0, y: 60, duration: 0.95, ease: 'power3.out'}, '<')
+        introTL.from('.profile-text-container h3', {autoAlpha: 0, y: 50, duration: 0.95, ease: 'power3.out'}, '<0.1')
         introTL.from('.profile-text-container p', {autoAlpha: 0, y: 40, duration: 0.95, ease: 'power3.out', onComplete:configureTweens()}, '<0.15')
     }
     function configureTweens() {
         // get percentage of current width vs max supported width
-        mainTL.to(splineBlobs.value.rotation, {y: -0.3}, '<');
+        mainTL.to(splineBlobs.value.rotation, {y: -0.8}, '<');
         mainTL.fromTo(profileImage.value, {y: '2%'}, { y: '-40%'}, '<');
         mainTL.fromTo(profileImageBg.value, {y: 0}, { y: -80}, '<');
-        mainTL.fromTo(heroLottieBackBean.value, {y: 150}, { y: -100}, '<');
-        mainTL.fromTo(heroLottieGradient.value, {y: 200}, { y: -250}, '<');
+        mainTL.fromTo(heroLottieBackBean.value, {y: 150}, { y: 0}, '<');
+        mainTL.fromTo(heroLottieGradient.value, {y: 200}, { y: -50}, '<');
 
         const mainST = scrollTrigger.create({
             animation: mainTL,
@@ -155,14 +157,19 @@
     position: absolute;
 }
 .lottie-back-bean {
-    width: 80cqw;
-    left: -25%;
-    top: 25%;;
+    width: 105cqw;
+    right: -5%;
+    top: 45%;
+    @media (min-width: $break-md) {
+        width: 80cqw;
+        right: -25%;
+        top: 5%;
+    }
 }
 
 .lottie-back-gradient {
     width: 80cqw;
-    right: -45%;
+    left: -45%;
     top: 25%;
 }
 
@@ -178,15 +185,18 @@
 .hero-headline {
     // position: absolute;
     font-family: 'Monument Extended';
-    font-weight: 400;
-    letter-spacing: -.03em;
-    line-height: 0.9;
+    letter-spacing: 0;
+    line-height: 1.3;
     z-index: 888;
     color: $color--brand-gray-light;
-    font-size: fluid-calc(24px, 100px);
+    font-size: 28px;
     text-align: center;
     width: 100%;
     margin-bottom: 0;
+    @media (min-width: $break-md) {
+        font-size: fluid-calc(24px, 100px);
+        line-height: 1;
+    }
 }
 .hero-subheading-one {
     color: $color--brand-yellow;
@@ -236,12 +246,28 @@
         transform: translateX(100px);
     }
     h2 {
-        font-size: fluid-calc(16px, 24px);
+        font-family: 'Inter Light', sans-serif;
+        font-size: 18px;
+        line-height: 0.9;
+        font-weight: bold;
+        @media (min-width: $break-md) {
+            font-size: fluid-calc(18px, 28px);
+        }
+    }
+    h3 {
+        font-size: 16px;
         line-height: 1.2;
+        color: $color--brand-yellow;
+        @media (min-width: $break-md) {
+            font-size: fluid-calc(16px, 24px);
+        }
     }
     p {
-        font-size: fluid-calc(10px, 14px);
-        line-height: 1.3;
+        font-size: 11px;
+        line-height: 1.5;
+        @media (min-width: $break-md) {
+            font-size: fluid-calc(10px, 14px);
+        }
     }
 }
 </style>

@@ -66,10 +66,11 @@ function configureTweens() {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem 0 10rem 0;
+    padding: 2rem 0 15rem 0;
     width: 100%;
+    overflow: hidden;
     @media (min-width: $break-md) {
-        padding: 3rem 0 16rem 0;
+        padding: 3rem 0 18rem 0;
     }
 }
 .connect-social-icon {
@@ -80,13 +81,17 @@ function configureTweens() {
     padding: 2rem;
     border: none;
     border-radius: 50%;
-    height: fluid-calc(40px, 90px);
-    width: fluid-calc(40px, 90px);
+    height: 32px;
+    width: 32px;
     background-color: $color--brand-blue-60;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: fluid-calc(8px, 18px);
+    @media (min-width: $break-md) {
+        height: fluid-calc(40px, 90px);
+        width: fluid-calc(40px, 90px);
+    }
 }
 .connect-social-button:hover {
     background-color: $color--brand-blue-90;
@@ -95,17 +100,21 @@ function configureTweens() {
     display:flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
     font-family: 'Monument Extended';
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: -.03em;
-    line-height: 0.9;
-    z-index: 888;
+    line-height:1.4;
     color: $color--brand-gray-light;
-    font-size: fluid-calc(60px, 110px);
-    text-align: center;
+    font-size: 52px;
+    
     width: 100%;
     text-transform: uppercase;
+    @media (min-width: $break-md) {
+        line-height: 0.9;
+        font-size: fluid-calc(60px, 110px);
+    }
+
 }
 .social-icons {
     display: flex;

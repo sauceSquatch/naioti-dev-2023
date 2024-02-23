@@ -11,6 +11,7 @@
     "@aws-amplify/backend": "^0.10.3",
     "@aws-amplify/backend-cli": "^0.10.0",
     "@nuxt/image": "^0.7.1",
+    "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/style-resources": "^1.2.1",
     "aws-cdk": "^2.126.0",
     "aws-cdk-lib": "^2.126.0",
