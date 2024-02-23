@@ -27,6 +27,7 @@
     </section>
 </template>
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import scrollTrigger from 'gsap/dist/ScrollTrigger'
 

@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import scrollTrigger from 'gsap/dist/ScrollTrigger'
 import caseStudies from '~/content/case-studies.json'
@@ -44,24 +45,6 @@ let hasScrolled = false;
 onMounted(() => {
     configureTweens()
 })
-
-onUpdated(() => {
-    console.log('updated')
-})
-
-let headlineWidth = computed(() => {
-    if(workHeadline.value) {
-        return workHeadline.value.offsetWidth
-    }
-    return 0
-})
-let headlineHeight = computed(() => {
-    if(workHeadline.value) {
-        return workHeadline.value.offsetHeight
-    }
-    return 0
-}) 
-
 
 
 function configureTweens() {
@@ -116,6 +99,7 @@ function scrollToggle() {
         justify-content: center;
         container-name: worksection;
         overflow: hidden;
+        background-color: $color--brand-blue-80;
 
         @media (min-width: $break-md) {
             // padding: 3.75rem 0;
@@ -125,6 +109,8 @@ function scrollToggle() {
         position: absolute;
         top: fluid-calc(100px, 200px);
         font-family: 'Monument Extended';
+        font-weight: 700;
+        letter-spacing: 1;
         font-size: fluid-calc(80px, 200px);
         color: $color--brand-blue-60;
         margin: 0;
