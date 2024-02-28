@@ -78,10 +78,10 @@ function configureTweens() {
 
 }
 function scrollToggle() {
-    console.log('scrolled: ', hasScrolled)
+    // console.log('scrolled: ', hasScrolled)
 
     if(!hasScrolled) {
-        console.log('emitting')
+        // console.log('emitting')
 
         hasScrolled = true
         emit('hasScrolled', true)

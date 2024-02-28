@@ -7,10 +7,12 @@
             <img ref="experienceClients" src="../assets/images/clients-experience.webp" alt="client logos for Samsung, IBM, Xbox, Motorol=la, Southwest airlines, Miller Coors, Hyundai, Pfizer, Kraft, Cadillac, Whirlpool, Patron Tequila, Grey Goose Vodka" class="experience-grid">
             <img ref="experienceMark" src="../assets/images/clients-experience-20-YRS.webp" alt="Twenty years +" class="header-mark">
         </div>
+        <!-- <OrbYellow class="orb-container" /> -->
     </section>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import scrollTrigger from 'gsap/dist/ScrollTrigger'
 
@@ -41,7 +43,7 @@ function configureTweens() {
                 animation: mainTL,
                 trigger: clientsSection.value, 
                 // markers: true,
-                start: 'top 65%',
+                start: 'top center',
                 end: 'center 12%',
                 toggleActions: 'play reverse play reverse'})
 }
@@ -50,19 +52,39 @@ function configureTweens() {
 <style lang="scss">
     .clients-section {
         background-color: $color--brand-yellow;
-        padding: 2.5rem 1rem 0 1rem;
+        padding-top: 60px;
+        padding-right: 8px;
+        padding-left: 8px;
+        padding-bottom: 20px;
         position: relative;
-        display: flex;
+        overflow-x: hidden;;
+        // display: flex;
         justify-content: center;
 
         @media (min-width: $break-md) {
             padding: 3.75rem 5rem 0 5rem;
+            padding-top: fluid-calc(80px, 140px);
+            padding-bottom: fluid-calc(64px, 90px);
         }
     }
+    // .orb-container {
+    //     position: absolute;
+    //     top: 280px;
+    //     left: 60px;
+    //     height: 120px;
+    //     width: 120px; 
+    //     @media (min-width: $break-md) {
+    //         top: 100px;
+    //         left: 40px;
+    //         height: 200px;
+    //         width: 200px; 
+    //     }
+    // }
     .clients-container {
         position: relative;
         width: 100%;
         max-width: 1100px;
+        margin: 0 auto;
     }
 
     .experience-grid {
